@@ -2,9 +2,21 @@
 
 emoji picker for local emojis
 
-## [live example](https://local-emoji-picker.richardsoderman.se/)
+## Installation
 
-**props**
+```sh
+pnpm install @hasparus/local-emoji-picker
+```
+
+```ts
+import { LocalEmojiPicker } from "@hasparus/local-emoji-picker";
+import "@hasparus/local-emoji-picker/dist/main.css";
+```
+
+## [Live Example](https://local-emoji-picker.richardsoderman.se/)
+
+**Props**
+
 - categorySelector: boolean
   - default: false
 - search: boolean
@@ -18,7 +30,7 @@ emoji picker for local emojis
 - idPrefix: string
   - default: ''
 
-### examples
+### Examples
 
 ```javascript
   const onClick = (data) => {
