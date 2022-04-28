@@ -1,6 +1,6 @@
 {
   "name": "@hasparus/local-emoji-picker",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "emoji picker for local emojis",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -36,7 +36,6 @@
   "devDependencies": {
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
-    "@types/store": "^2.0.1",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
@@ -57,8 +56,5 @@
   "peerDependencies": {
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18"
-  },
-  "dependencies": {
-    "store": "^2.0.12"
   }
 }
