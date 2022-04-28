@@ -1,6 +1,6 @@
 {
   "name": "@hasparus/local-emoji-picker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "emoji picker for local emojis",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

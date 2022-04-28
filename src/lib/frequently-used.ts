@@ -7,15 +7,24 @@ type EmojiDataWithUsedNr = {
   used: number;
 } & EmojiData;
 
+export const getFrequentlyUsed = () => {
+  const storedValue = localStorage.getItem(storePath);
+
+  try {
+    return storedValue
+      ? (JSON.parse(storedValue) as Array<EmojiDataWithUsedNr>)
+      : [];
+  } catch {
+    return [];
+  }
+};
+
 export const addToFrequentlyUsed = (
   emojiData: EmojiData
 ): Array<EmojiDataWithUsedNr> => {
-  const currentFrequentlyUsed: Array<EmojiDataWithUsedNr> = localStorage.get(
-    storePath,
-    []
-  );
+  const currentFrequentlyUsed = getFrequentlyUsed();
 
-  let index;
+  let index = -1;
   const hasValue = currentFrequentlyUsed.find(
     (storedEmojiData: EmojiDataWithUsedNr, i) => {
       if (storedEmojiData.v === emojiData.v) {
@@ -32,7 +41,7 @@ export const addToFrequentlyUsed = (
     value.used = value.used + 1;
 
     currentFrequentlyUsed[index] = value;
-    localStorage.set(storePath, currentFrequentlyUsed);
+    localStorage.setItem(storePath, JSON.stringify(currentFrequentlyUsed));
     return currentFrequentlyUsed;
   }
 
@@ -44,14 +53,6 @@ export const addToFrequentlyUsed = (
     },
   ];
 
-  localStorage.set(storePath, newFrequentlyUsed);
+  localStorage.setItem(storePath, JSON.stringify(newFrequentlyUsed));
   return newFrequentlyUsed;
-};
-
-export const getFrequentlyUsed = () => {
-  const currentFrequentlyUsed: Array<EmojiDataWithUsedNr> = localStorage.get(
-    storePath,
-    []
-  );
-  return currentFrequentlyUsed;
 };
