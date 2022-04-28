@@ -1,6 +1,6 @@
 {
   "name": "@hasparus/local-emoji-picker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "emoji picker for local emojis",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,7 +13,8 @@
     "build:prod": "cross-env NODE_ENV=production webpack && tsc --emitDeclarationOnly",
     "build:site": "cross-env NODE_ENV=production webpack --config webpack.site.config.js",
     "serve:site": "npx serve docs",
-    "dev": "npx webpack-dev-server --config webpack.development.config.js --port 3000 --open"
+    "dev": "npx webpack-dev-server --config webpack.development.config.js --port 3000 --open",
+    "release": "npm run build:prod && npm publish"
   },
   "keywords": [
     "emoji",
