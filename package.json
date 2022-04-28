@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "description": "emoji picker for local emojis",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "node dist/index.js",
     "build:analyze": "cross-env NODE_ENV=production ANALYZE=1 webpack",
-    "build:prod": "cross-env NODE_ENV=production ./node_modules/.bin/webpack",
-    "build:site": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --config webpack.site.config.js",
+    "build:prod": "cross-env NODE_ENV=production webpack && tsc --emitDeclarationOnly",
+    "build:site": "cross-env NODE_ENV=production webpack --config webpack.site.config.js",
     "dev": "npx webpack-dev-server --config webpack.development.config.js --port 3000 --open"
   },
   "keywords": [

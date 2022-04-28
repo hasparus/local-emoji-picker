@@ -8,14 +8,8 @@
     "esModuleInterop": true,
     "outDir": "./dist/",
     "jsx": "react",
+    "declaration": true
   },
-  "include": [
-    "./src/**/*",
-    "./src/lib/emoji-list.json"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  "include": ["./src/**/*", "./src/lib/emoji-list.json"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
-
