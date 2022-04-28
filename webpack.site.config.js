@@ -12,7 +12,7 @@ module.exports = {
     app: ["./preview/preview.tsx"],
   },
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.join(__dirname, "/docs"),
     pathinfo: false,
     chunkFilename: "chunk-[name].[contenthash].js",
     filename: "bundle.js",
