@@ -1,30 +1,33 @@
-const webpack = require('webpack')
-const path = require('path')
-const childProcess = require('child_process')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const nodeExternals = require('webpack-node-externals')
+const webpack = require("webpack");
+const path = require("path");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const nodeExternals = require("webpack-node-externals");
 
+/** @type {webpack.Configuration} */
 module.exports = {
-  mode: 'production',
-  entry: path.resolve(__dirname, 'src/index.tsx'),
+  mode: "production",
+  entry: path.resolve(__dirname, "src/index.tsx"),
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'index.js',
-    library: '',
-    libraryTarget: 'commonjs',
+    path: path.join(__dirname, "/dist"),
+    filename: "index.js",
+    library: "",
+    libraryTarget: "commonjs",
   },
 
   // Enable sourcemaps for debugging webpack's output.
-  devtool: 'source-map',
+  devtool: "source-map",
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
-  externals: [nodeExternals({
-    whitelist: ['store']
-  })],
+  externals: [
+    nodeExternals({
+      whitelist: ["store"],
+    }),
+  ],
 
   module: {
     rules: [
@@ -32,28 +35,31 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
+            loader: "awesome-typescript-loader",
             options: {
-              useCache: true
-            }
-          }
-        ]
+              useCache: true,
+            },
+          },
+        ],
       },
 
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCSSExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: { implementation: require("sass") },
+          },
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new MiniCSSExtractPlugin({
-      filename: '[name].css'
+      filename: "[name].css",
     }),
-    new BundleAnalyzerPlugin()
-  ]
-}
+    process.env.ANALYZE === "1" && new BundleAnalyzerPlugin(),
+  ].filter(Boolean),
+};
