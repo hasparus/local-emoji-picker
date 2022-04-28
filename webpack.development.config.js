@@ -1,35 +1,36 @@
-const webpack = require('webpack')
-const path = require('path')
-const childProcess = require('child_process')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const FixDefaultImportPlugin = require('webpack-fix-default-import-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const webpack = require("webpack");
+const path = require("path");
+const childProcess = require("child_process");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const FixDefaultImportPlugin = require("webpack-fix-default-import-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:3000',
-      './preview/preview.tsx',
-    ]
+      "webpack-dev-server/client?http://localhost:3000",
+      "./preview/preview.tsx",
+    ],
   },
   output: {
-    filename: 'bundle.js',
+    filename: "bundle.js",
     pathinfo: false,
-    path: path.join(__dirname, '/dist')
+    path: path.join(__dirname, "/dist"),
   },
 
   // Enable sourcemaps for debugging webpack's output.
-  devtool: 'eval',
+  devtool: "eval",
 
   devServer: {
-    port: 3000
+    port: 3000,
   },
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
 
   module: {
@@ -38,30 +39,33 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
+            loader: "awesome-typescript-loader",
             options: {
-              useCache: true
-            }
-          }
-        ]
+              useCache: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCSSExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: { implementation: require("sass") },
+          },
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new MiniCSSExtractPlugin({
-      filename: '[name].css'
+      filename: "[name].css",
     }),
     new FixDefaultImportPlugin(),
     new HtmlWebpackPlugin({
-      template: 'preview/index.html',
+      template: "preview/index.html",
     }),
-  ]
-}
+  ],
+};

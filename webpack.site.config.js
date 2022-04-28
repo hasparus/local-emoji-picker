@@ -1,31 +1,29 @@
-const webpack = require('webpack')
-const path = require('path')
-const childProcess = require('child_process')
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const FixDefaultImportPlugin = require('webpack-fix-default-import-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require("webpack");
+const path = require("path");
+const childProcess = require("child_process");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const FixDefaultImportPlugin = require("webpack-fix-default-import-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: 'production',
+  mode: "production",
   entry: {
-    app: [
-      './preview/preview.tsx',
-    ],
+    app: ["./preview/preview.tsx"],
   },
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, "/dist"),
     pathinfo: false,
-    chunkFilename: 'chunk-[name].[contenthash].js',
-    filename: 'bundle.js',
+    chunkFilename: "chunk-[name].[contenthash].js",
+    filename: "bundle.js",
   },
 
   // Enable sourcemaps for debugging webpack's output.
-  devtool: 'source-map',
+  devtool: "source-map",
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
 
   module: {
@@ -34,40 +32,43 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
+            loader: "awesome-typescript-loader",
             options: {
-              useCache: true
-            }
-          }
-        ]
+              useCache: true,
+            },
+          },
+        ],
       },
 
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCSSExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: { implementation: require("sass") },
+          },
+        ],
       },
-    ]
+    ],
   },
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: "all",
     },
   },
   plugins: [
     new MiniCSSExtractPlugin({
-      filename: '[name].css'
+      filename: "[name].css",
     }),
     new FixDefaultImportPlugin(),
     new HtmlWebpackPlugin({
-      inject: 'head',
-      template: 'preview/index.html',
+      inject: "head",
+      template: "preview/index.html",
     }),
     new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'defer'
+      defaultAttribute: "defer",
     }),
-  ]
-}
+  ],
+};
