@@ -4,6 +4,9 @@
   "description": "emoji picker for local emojis",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "node dist/index.js",
     "build:analyze": "cross-env NODE_ENV=production ANALYZE=1 webpack",
